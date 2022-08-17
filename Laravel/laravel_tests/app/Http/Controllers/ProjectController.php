@@ -7,13 +7,17 @@ use App\Models\Appointment;
 
 class ProjectController extends Controller
 {
-        
+
 
     public function getData(Request $request){
         $data = "This is my data";
         return view('index',['key'=>$data]);
     }
-
+ 
+    public function getDepartment(Request $request){
+        $departments = Department::all();
+        return view ('index',['departments' =>$departments]);
+    }
 
     public function showAppointments(Request $request){
         $appointment = $request->input('appointment_date')
