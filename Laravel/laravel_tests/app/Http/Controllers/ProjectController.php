@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use App\Models\Department;
 
 class ProjectController extends Controller
 {
@@ -14,14 +15,14 @@ class ProjectController extends Controller
         return view('index',['key'=>$data]);
     }
  
-    public function getDepartment(Request $request){
+    public function getAllDepartments(Request $request){
         $departments = Department::all();
         return view ('index',['departments' =>$departments]);
     }
 
     public function showAppointments(Request $request){
-        $appointment = $request->input('appointment_date')
-        $appointments = Appointment::where('appointment', $appointment)->get();
-        return \view('appointments',['appointment_date'=>$appointment_date]);
+        $department_name = $request->input('department_name');
+        $appointments = Appointment::where('department_name', $department_name)->get();
+        return \view('appointments',['appointments'=>$appointments]);
     }
 }
